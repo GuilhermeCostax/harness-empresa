@@ -13,6 +13,7 @@ projeto novo. Para configurar o harness para outra empresa, ver
 | Git com acesso ao GitHub | `gh auth status` mostra a conta logada, ou `git ls-remote https://github.com/GuilhermeCostax/harness-empresa` funciona |
 | GitHub CLI logado (o harness usa para preencher o *Quem* do plano) | `gh api user --jq .login` mostra o usuário |
 | Conector Claude Docs ligado (planos e docs de regras ficam lá) | No Claude Code, o plano do projeto abre pelas ferramentas de Docs |
+| Python 3.9 ou mais novo (os hooks de proteção rodam em Python) | `python3 --version`. Sem ele, os hooks não rodam e nada é bloqueado |
 
 ## 2. Instalar o plugin na máquina
 
@@ -77,11 +78,44 @@ Reiniciar o Claude Code depois.
    }
    ```
 
-3. Criar a pasta de documentação de funcionalidades com o modelo
+3. Copiar `modelos/harness.json` para `.claude/harness.json` e ajustar ao projeto (tabela
+   abaixo). É o que os hooks de proteção leem.
+4. Criar a pasta de documentação de funcionalidades com o modelo
    (`skills/documentar/modelo.md` vira `<pasta>/_modelo/README.md`).
-4. Pôr no `.gitignore` o arquivo de logins de teste e o arquivo de contexto que o `CLAUDE.md`
+5. Pôr no `.gitignore` o arquivo de logins de teste e o arquivo de contexto que o `CLAUDE.md`
    cita.
-5. Commitar `CLAUDE.md`, `.claude/settings.json` e o `.gitignore` juntos.
+6. Commitar `CLAUDE.md`, `.claude/settings.json`, `.claude/harness.json` e o `.gitignore` juntos.
+
+### O `.claude/harness.json`
+
+Cada bloco liga uma proteção. Bloco que falta é proteção desligada, sem erro. O bloqueio de push
+forçado e de `git reset --hard` vale sempre, mesmo sem o arquivo.
+
+| Bloco | O que protege | Campos |
+| --- | --- | --- |
+| `branchPrincipal` | Push forçado na principal | Nome da branch. Sem ele, usa a do `origin` ou `main` |
+| `producao` | Comando que mexe em dados rodando contra produção | `arquivoEnv`; `variavelAmbiente` + `valoresProibidos` (ex.: `APP_ENV=production`); `variaveisDeBanco` cujo host precisa estar em `hostsLocais`; `comandos` que contam como "mexe em dados" |
+| `testes` | Duas execuções de testes ao mesmo tempo no mesmo banco | `comandos` de teste; `processoEmExecucao`, o padrão de processo (do `pgrep -f`) que indica teste rodando |
+| `documentacao` | Commit que mexe no código sem tocar no documento (só avisa) | `pasta` da documentação; `codigo`, as pastas que contam como código de funcionalidade |
+| `commit` | Título fora do padrão e assinatura do Claude | `tipos` aceitos; `idObrigatorioEm`, os tipos que exigem ID; `padraoId`, a forma do ID |
+
+O hook nunca mostra nem guarda valores do `.env`: só confere se o host do banco é local.
+
+## 5a. O que os hooks fazem
+
+| Quando | Hook | Resultado |
+| --- | --- | --- |
+| Início da sessão | Regras gerais | Entram no contexto |
+| Antes de um comando | `git push --force`, `-f`, `+refspec` | Bloqueia; na branch da tarefa, só `--force-with-lease` |
+| Antes de um comando | `--force-with-lease` na principal | Bloqueia |
+| Antes de um comando | `git reset --hard` | Bloqueia |
+| Antes de um comando | Comando de `producao.comandos` com produção no `.env` | Bloqueia |
+| Antes de um comando | Teste com outra execução de teste rodando | Bloqueia |
+| Depois de um commit | Título fora do padrão, ID faltando, assinatura do Claude | Devolve ao Claude para corrigir com `--amend` |
+| Depois de um commit | Código mudou e documentação não | Avisa, sem exigir nada |
+
+Os hooks só valem para os comandos do Claude. O que o dev roda no próprio terminal não passa por
+eles.
 
 ## 6. Testar uma mudança no plugin antes de subir
 

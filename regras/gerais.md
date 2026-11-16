@@ -1,5 +1,10 @@
 # Harness da empresa — regras gerais
 
+> Parte destas regras é garantida por hooks: push forçado, `git reset --hard`, comando que mexe
+> em dados com o banco de produção configurado, duas execuções de testes ao mesmo tempo e
+> commit fora do padrão são barrados ou devolvidos com o motivo. Bloqueio do harness não se
+> contorna: explicar ao dev e deixar a decisão com ele.
+
 Estas regras valem em todo projeto da empresa. O que é de cada projeto (stack, comandos, links,
 armadilhas) está no `CLAUDE.md` dele, na seção **Dados do projeto (harness)**. Se um projeto não
 tiver essa seção, avisar o dev antes de começar uma tarefa.
@@ -92,6 +97,7 @@ Plano, protótipo e reuniões são o **alvo**; a documentação é o estado atua
 - Commits pequenos, uma tarefa por commit, com a documentação junto.
 - Mensagem em Conventional Commits, em **pt-BR**:
   - Título: `tipo: <ID> o que mudou`, curto, no presente. Tipos: `feat`, `fix`, `chore`, `docs`.
+    O ID é obrigatório em `feat`; num `fix` de defeito fora do plano pode faltar, nunca inventar um.
   - Corpo: um parágrafo com o **defeito ou a motivação** (o que acontecia e por quê), depois
     bullets do que mudou, incluindo a linha da documentação atualizada.
 

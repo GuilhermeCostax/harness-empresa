@@ -19,7 +19,9 @@ base, ajusta o que for dela e instala nos seus projetos. Cada projeto escreve s�
 | `/harness:push <ID>` | `skills/push/` | Etapa 7: integra sem quebrar o trabalho dos outros e abre o PR |
 | `/harness:status <ID> <status>` | `skills/status/` | Status no plano, no formato que o projeto define |
 | `/harness:documentar` | `skills/documentar/` | Documento da funcionalidade, pelo modelo |
+| Hooks de proteção | `hooks/hooks.json` + `scripts/harness_hooks.py` | Bloqueiam push forçado, `reset --hard`, produção e testes simultâneos; conferem cada commit |
 | Modelo de projeto | `modelos/CLAUDE-projeto.md` | Esqueleto do `CLAUDE.md` de um sistema novo |
+| Configuração dos hooks | `modelos/harness.json` | Vai para `.claude/harness.json` de cada projeto |
 
 O dev não precisa chamar as skills pelo nome: "faz a EMP-14" já aciona a `tarefa`.
 

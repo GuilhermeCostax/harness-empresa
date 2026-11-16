@@ -1,0 +1,24 @@
+{
+  "branchPrincipal": "main",
+  "producao": {
+    "arquivoEnv": ".env",
+    "variavelAmbiente": "APP_ENV",
+    "valoresProibidos": ["production", "prod"],
+    "variaveisDeBanco": ["DATABASE_URL"],
+    "hostsLocais": ["localhost", "127.0.0.1", "::1"],
+    "comandos": ["make run", "make migrate", "npm run migrate", "go test"]
+  },
+  "testes": {
+    "comandos": ["go test"],
+    "processoEmExecucao": "go test|/[^ ]+\\.test( |$)"
+  },
+  "documentacao": {
+    "pasta": "funcionalidades/",
+    "codigo": ["src/"]
+  },
+  "commit": {
+    "tipos": ["feat", "fix", "chore", "docs"],
+    "idObrigatorioEm": ["feat"],
+    "padraoId": "[A-Z]{2,4}-[0-9]{2}"
+  }
+}
