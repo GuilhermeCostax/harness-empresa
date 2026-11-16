@@ -85,6 +85,10 @@ Plano, protótipo e reuniões são o **alvo**; a documentação é o estado atua
   `--force-with-lease`.
 - Conflito: resolver mantendo **as duas** alterações funcionando. Sem entender a intenção do outro
   lado, parar e perguntar ao dev.
+- **Nada assinado pelo Claude.** Commit, PR, comentário de PR ou issue sai em nome do dev, sem
+  `Co-Authored-By: Claude`, sem "Generated with Claude Code" e sem qualquer menção à IA. O
+  `.claude/settings.json` do projeto desliga a assinatura automática (`attribution`); a regra
+  vale mesmo se a configuração faltar.
 - Commits pequenos, uma tarefa por commit, com a documentação junto.
 - Mensagem em Conventional Commits, em **pt-BR**:
   - Título: `tipo: <ID> o que mudou`, curto, no presente. Tipos: `feat`, `fix`, `chore`, `docs`.

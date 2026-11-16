@@ -60,7 +60,8 @@ continuar funcionando; se a dele quebrou por causa da sua, corrigir antes de sub
 2. Abrir o PR para `<principal>` com `gh pr create`:
    - título igual ao do commit principal (`tipo: <ID> o que mudou`);
    - corpo com o parágrafo da motivação, a lista do que mudou, o documento de funcionalidade
-     atualizado e o passo a passo de validação que o dev já conferiu.
+     atualizado e o passo a passo de validação que o dev já conferiu;
+   - sem assinatura do Claude: nada de "Generated with Claude Code" nem `Co-Authored-By`.
 3. Passar o link do PR ao dev. A tarefa continua **Em revisão** até o merge.
 4. Pedido de mudança no PR: a tarefa volta para **Fazendo** e o trabalho para a etapa 3 da
    skill **tarefa**.

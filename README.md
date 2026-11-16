@@ -30,6 +30,8 @@ O dev não precisa chamar as skills pelo nome: "faz a EMP-14" já aciona a `tare
   consegue fixar o modelo).
 - Ao fechar uma tarefa: salvar o que importa no arquivo de contexto e limpar a conversa com
   `/clear`.
+- Nada sai assinado pelo Claude: commits e PRs em nome do dev (`attribution` vazio no
+  `.claude/settings.json` do projeto, e a regra escrita nas regras gerais).
 - Só Claude Code. Não há versão para o Codex.
 
 ## Mudar uma regra

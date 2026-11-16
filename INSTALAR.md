@@ -56,14 +56,16 @@ Reiniciar o Claude Code depois.
 
 1. Copiar `modelos/CLAUDE-projeto.md` para a raiz do projeto como `CLAUDE.md` e preencher a
    seção **Dados do projeto (harness)**, a stack, a organização do código e as armadilhas.
-2. Criar `.claude/settings.json` no projeto. Ele liga o plugin e fixa o padrão de modelo (Opus 5.5)
-   e de esforço (médio) para todo mundo no projeto. Quem precisar de outro na própria máquina
-   muda no `.claude/settings.local.json` ou com `/model` e `/effort` na sessão.
+2. Criar `.claude/settings.json` no projeto. Ele liga o plugin, fixa o padrão de modelo (Opus 5.5)
+   e de esforço (médio) e tira a assinatura do Claude de commits e PRs (`attribution` vazio).
+   Quem precisar de outro modelo na própria máquina muda no `.claude/settings.local.json` ou com
+   `/model` e `/effort` na sessão.
 
    ```json
    {
      "model": "claude-opus-5-5",
      "effortLevel": "medium",
+     "attribution": { "commit": "", "pr": "" },
      "extraKnownMarketplaces": {
        "harness-empresa": {
          "source": { "source": "github", "repo": "GuilhermeCostax/harness-empresa" }
