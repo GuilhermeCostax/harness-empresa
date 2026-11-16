@@ -38,7 +38,8 @@ depende de decisão do dev. O que sobrar vai no relatório da parte 1, com todas
 Divergência entre documento e código nunca se resolve mudando o código sem o dev decidir.
 
 A IA não abre navegador, não tira print e não pede para conferir pixel, a menos que o projeto
-diga o contrário.
+diga o contrário ou o dev tenha ligado o plugin `harness-navegador` (aí, depois desta parte,
+seguir a skill `comparar-tela` dele).
 
 ## 2. O passo a passo para o dev
 

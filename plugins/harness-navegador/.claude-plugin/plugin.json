@@ -1,0 +1,6 @@
+{
+  "name": "harness-navegador",
+  "description": "Opcional, por dev: a IA testa as telas no navegador e entrega uma página com o protótipo e o sistema lado a lado, sem o dev abrir tela por tela.",
+  "version": "0.1.0",
+  "author": { "name": "Equipe de desenvolvimento" }
+}

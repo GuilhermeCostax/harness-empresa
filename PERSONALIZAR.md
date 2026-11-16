@@ -50,6 +50,7 @@ Ler cada arquivo e mudar o que a empresa faz diferente. O que já serve fica com
 | `skills/status/SKILL.md` | Onde fica o plano de tarefas (Claude Docs, Jira, GitHub Projects) e o formato padrão de status |
 | `skills/documentar/` | O modelo de documento de funcionalidade (`modelo.md`) e as regras de escrita |
 | `agents/*.md` | Os revisores: o que cada um confere, o formato do relatório e o modelo (`model:`) |
+| `plugins/harness-navegador/` | O plugin opcional de teste no navegador; remover da `marketplace.json` se a empresa não quiser oferecer |
 | `scripts/harness_hooks.py` | As proteções: o que bloquear antes de um comando e o que conferir depois de um commit. O que varia por projeto fica no `.claude/harness.json` do projeto, não aqui |
 | `modelos/harness.json` | Os valores de partida que um projeto novo copia |
 

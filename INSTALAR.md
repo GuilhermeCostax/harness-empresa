@@ -58,6 +58,24 @@ claude plugin update harness@harness-empresa
 
 Reiniciar o Claude Code depois.
 
+## 4b. Opcional, por dev: teste no navegador
+
+O plugin `harness-navegador` faz a IA testar as telas no navegador e entregar uma página com o
+protótipo e o sistema lado a lado. É **por dev**: liga quem quer, só na própria máquina, e o resto
+do time não é afetado.
+
+```
+claude plugin install harness-navegador@harness-empresa --scope local
+```
+
+Rodar dentro da pasta do projeto. O `--scope local` grava a escolha no
+`.claude/settings.local.json` do projeto, que é pessoal e fica fora do git (o projeto precisa ter
+esse arquivo no `.gitignore`). Para desligar: `claude plugin uninstall harness-navegador@harness-empresa --scope local`.
+
+Precisa de Node, Google Chrome e, para o teste clicando nas telas, do app desktop do Claude
+(navegador embutido). O projeto precisa da linha *Teste no navegador* em **Dados do projeto
+(harness)**, apontando a ferramenta de captura dele.
+
 ## 5. Ligar o harness num projeto novo
 
 1. Copiar `modelos/CLAUDE-projeto.md` para a raiz do projeto como `CLAUDE.md` e preencher a

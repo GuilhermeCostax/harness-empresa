@@ -11,6 +11,11 @@
       "name": "harness",
       "source": "./",
       "description": "Processo de desenvolvimento da empresa para o Claude Code."
+    },
+    {
+      "name": "harness-navegador",
+      "source": "./plugins/harness-navegador",
+      "description": "Opcional, por dev: teste nas telas no navegador e página de comparação protótipo × sistema."
     }
   ]
 }

@@ -25,6 +25,7 @@ O plugin lê esta seção. Preencher tudo; o que não se aplica, escrever "não 
 | Auxiliar de banco nos testes | <ex. `helpers/testdb`> |
 | Arquivo de logins de teste | <ex. `LOGINS-TESTE.md`, fora do git> |
 | Arquivo de contexto | <ex. `CONTEXTO_PROJETO.md`, fora do git: estado das tarefas desta máquina> |
+| Teste no navegador (opcional, por dev) | <ferramenta de captura, URLs do sistema e da referência visual, login; ou "não tem"> |
 | Pronto: itens extras | <o que este projeto exige além do geral> |
 
 ## Stack — seguir fielmente

@@ -23,6 +23,7 @@ base, ajusta o que for dela e instala nos seus projetos. Cada projeto escreve s�
 | Sub-agente `documentador` | `agents/documentador.md` | Aponta onde o documento da funcionalidade diverge do código (etapa 5) |
 | Sub-agente `testador` | `agents/testador.md` | Roda só os testes da tarefa; pulado conta como problema (etapas 4 e 5) |
 | Sub-agente `integrador` | `agents/integrador.md` | Antes do push, simula a integração e aponta conflitos e riscos |
+| Plugin opcional `harness-navegador` | `plugins/harness-navegador/` | Por dev: teste nas telas no navegador e página protótipo × sistema (skill `comparar-tela`) |
 | Hooks de proteção | `hooks/hooks.json` + `scripts/harness_hooks.py` | Bloqueiam push forçado, `reset --hard`, produção e testes simultâneos; conferem cada commit |
 | Modelo de projeto | `modelos/CLAUDE-projeto.md` | Esqueleto do `CLAUDE.md` de um sistema novo |
 | Configuração dos hooks | `modelos/harness.json` | Vai para `.claude/harness.json` de cada projeto |
