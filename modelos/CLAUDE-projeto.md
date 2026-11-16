@@ -4,8 +4,8 @@
 
 > Este projeto usa o plugin **harness** da empresa: o processo (as 7 etapas, validação, push,
 > status e documentação) vem dele. Se as skills `/harness:tarefa` não estiverem disponíveis nesta
-> sessão, ler o `AGENTS.md`, que tem o processo completo. O `AGENTS.md` é gerado: não editar à
-> mão.
+> sessão, **não começar nenhuma tarefa** e pedir ao dev para instalar o plugin (`INSTALAR.md` do
+> repositório do plugin).
 
 ## Dados do projeto (harness)
 
@@ -14,6 +14,7 @@ O plugin lê esta seção. Preencher tudo; o que não se aplica, escrever "não 
 | Item | Valor |
 | --- | --- |
 | Plano de tarefas | <link do plano no Claude Docs> |
+| Formato do status no plano | <nomes dos status e colunas; ou "padrão do plugin"> |
 | Doc de regras de negócio | <link> |
 | Transcrições das reuniões | <pasta, ex. `arquitetura/audios/`> |
 | Referência visual | <protótipo ou design, e como ler> |
@@ -23,6 +24,7 @@ O plugin lê esta seção. Preencher tudo; o que não se aplica, escrever "não 
 | Testes da tarefa | <comando com filtro, modo detalhado> |
 | Auxiliar de banco nos testes | <ex. `helpers/testdb`> |
 | Arquivo de logins de teste | <ex. `LOGINS-TESTE.md`, fora do git> |
+| Arquivo de contexto | <ex. `CONTEXTO_PROJETO.md`, fora do git: estado das tarefas desta máquina> |
 | Pronto: itens extras | <o que este projeto exige além do geral> |
 
 ## Stack — seguir fielmente

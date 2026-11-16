@@ -1,14 +1,18 @@
 ---
 name: push
-description: Etapa 7 do processo da empresa. Commita a tarefa, confere o que os outros devs subiram, integra sem quebrar o trabalho deles e sobe para a branch principal, marcando a tarefa como Feito. Use só quando o dev disser que a tarefa está correta e pedir para commitar, subir ou dar push.
+description: Etapa 7 do processo da empresa. Commita a tarefa, confere o que os outros devs subiram, integra sem quebrar o trabalho deles e sobe — por PR (padrão) ou direto na branch principal, se o projeto usar esse fluxo. Use só quando o dev disser que a tarefa está correta e pedir para commitar, subir, abrir o PR ou dar push.
 argument-hint: <ID da tarefa>
 ---
 
 # Subir a tarefa $ARGUMENTS
 
-Só rodar depois de o dev dizer que está tudo correto **e** pedir para subir. A branch principal e
-o fluxo (direto nela ou por PR) vêm de **Dados do projeto (harness)** no `CLAUDE.md`. Abaixo,
+Só rodar depois de o dev dizer que está tudo correto **e** pedir para subir.
+
+A branch principal e o fluxo vêm de **Dados do projeto (harness)** no `CLAUDE.md`. Abaixo,
 `<principal>` é essa branch.
+
+- **Por PR** — o padrão da empresa. Vale quando o projeto não diz nada.
+- **Direto na principal** — só quando o `CLAUDE.md` do projeto disser isso com todas as letras.
 
 ## 1. Commitar o próprio trabalho
 
@@ -28,10 +32,10 @@ Ler os commits que tocam os mesmos arquivos ou a mesma funcionalidade, e o docum
 ## 3. Integrar
 
 ```
-git pull --rebase origin <principal>
+git rebase origin/<principal>
 ```
 
-Rebase, não merge, para a branch não encher de commits de merge.
+Rebase, não merge, para o histórico não encher de commits de merge.
 
 Conflito: resolver mantendo **as duas** alterações funcionando. Nunca descartar o lado do outro
 dev (`--ours`/`--theirs` no arquivo inteiro) só para a sua parte passar. Sem entender a intenção
@@ -43,17 +47,43 @@ do outro lado, parar e perguntar ao dev. Em índice de documentação, conflito 
 Rodar o build e a checagem estática do projeto. A funcionalidade do outro dev e a sua precisam
 continuar funcionando; se a dele quebrou por causa da sua, corrigir antes de subir.
 
-## 5. Subir
+## 5a. Subir por PR (padrão)
+
+1. Subir a branch da tarefa (criada na etapa 1):
+
+   ```
+   git push -u origin <branch da tarefa>
+   ```
+
+   Se a branch já estava no GitHub e o rebase mudou o histórico, usar
+   `git push --force-with-lease`. **Só na branch da tarefa, nunca na principal.**
+2. Abrir o PR para `<principal>` com `gh pr create`:
+   - título igual ao do commit principal (`tipo: <ID> o que mudou`);
+   - corpo com o parágrafo da motivação, a lista do que mudou, o documento de funcionalidade
+     atualizado e o passo a passo de validação que o dev já conferiu.
+3. Passar o link do PR ao dev. A tarefa continua **Em revisão** até o merge.
+4. Pedido de mudança no PR: a tarefa volta para **Fazendo** e o trabalho para a etapa 3 da
+   skill **tarefa**.
+5. Com o PR aprovado e o merge feito, a tarefa vai para **Feito**. O merge é do dev ou do
+   revisor; a IA não faz merge por conta própria.
+
+## 5b. Subir direto na principal (só se o projeto usar)
 
 ```
 git push origin <principal>
 ```
 
-Push recusado (alguém subiu no meio): voltar ao passo 2.
+Push recusado (alguém subiu no meio): voltar ao passo 2. Com o push feito, a tarefa vai para
+**Feito**.
 
-**Nunca `git push --force` nem `git reset --hard`.**
+**Nunca `git push --force` na principal, nem `git reset --hard`.**
 
 ## 6. Status
 
-Com o push feito, a tarefa vai para **Feito** e o módulo é conferido (skill **status**). Nunca
-marcar **Feito** antes do push.
+Atualizar o status pela skill **status**. Nunca marcar **Feito** antes do merge (PR) ou do push
+(direto na principal).
+
+## 7. Fechar a tarefa
+
+Seguir *Ao fechar uma tarefa* das regras gerais: salvar o que importa e sugerir ao dev limpar o
+contexto antes da próxima.

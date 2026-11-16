@@ -15,6 +15,20 @@ concreto.
 - Etapa 5 é a skill **validar**, a 7 é a skill **push**, e toda mudança de status no plano segue
   a skill **status**. Documento de funcionalidade segue a skill **documentar**.
 
+## Ao fechar uma tarefa
+
+Cada tarefa começa do zero, lendo o plano e a documentação. O histórico da tarefa anterior só
+atrapalha. Com a tarefa em **Feito** (ou parada para o dia):
+
+1. Salvar no **arquivo de contexto** do projeto (ver *Dados do projeto*) só o que a próxima
+   sessão precisa: estado das tarefas, pendências com outros devs, dúvidas em aberto. O que é regra
+   de negócio já está no documento da funcionalidade; não repetir.
+2. Dizer ao dev, em uma linha, que pode rodar `/clear` antes da próxima tarefa. Só o dev roda; a
+   IA não consegue limpar o contexto sozinha.
+
+`/compact` é para o meio de uma tarefa longa: resume a conversa e continua nela. Entre tarefas, o
+certo é `/clear`.
+
 ## Regra de negócio: nunca adivinhar
 
 Quando o plano não basta, consultar nesta ordem, usando o que o projeto lista em *Dados do
@@ -62,9 +76,13 @@ Plano, protótipo e reuniões são o **alvo**; a documentação é o estado atua
 
 ## Git e commits
 
-- **Só commitar ou dar push quando o dev pedir.** O normal é deixar no working tree para revisão.
+- **Fluxo padrão: uma branch por tarefa e PR para a branch principal.** Projeto que sobe direto
+  na principal diz isso no `CLAUDE.md`, e aí vale o projeto.
+- **Só commitar, dar push ou abrir PR quando o dev pedir.** O normal é deixar no working tree
+  para revisão. Merge é do dev ou do revisor, nunca da IA por conta própria.
 - **Nunca `git push --force` na branch principal, nem `git reset --hard`** para resolver
-  conflito: apaga o trabalho de outro dev.
+  conflito: apaga o trabalho de outro dev. Na branch da própria tarefa, depois de um rebase, só
+  `--force-with-lease`.
 - Conflito: resolver mantendo **as duas** alterações funcionando. Sem entender a intenção do outro
   lado, parar e perguntar ao dev.
 - Commits pequenos, uma tarefa por commit, com a documentação junto.

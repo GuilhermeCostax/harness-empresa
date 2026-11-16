@@ -18,7 +18,14 @@ acesso ao plano: avisar o dev para ele mudar à mão.
 - Vários devs editam ao mesmo tempo: ler a linha logo antes de mudar. Se ela mudou desde a
   leitura, manter o que o outro escreveu e avisar o dev.
 
-## Status da tarefa
+## Formato do plano é do projeto
+
+Cada projeto organiza o plano do seu jeito. Os nomes dos status, as colunas (*Quem*, *Depende*…),
+o status do módulo e o gráfico vêm do `CLAUDE.md` do projeto. Valem os nomes dele, mesmo que
+sejam outros. O que o projeto não definir segue o padrão abaixo. Plano sem algum desses itens
+(sem coluna de módulo, sem gráfico): pular o item, sem criar nada no plano.
+
+## Status da tarefa (padrão)
 
 Opções: **A fazer**, **Fazendo**, **Em revisão**, **Feito**, **Travada**.
 
@@ -27,13 +34,14 @@ Opções: **A fazer**, **Fazendo**, **Em revisão**, **Feito**, **Travada**.
 | Etapa 1, começou a tarefa | **Fazendo** | Usuário do GitHub do dev em *Quem* |
 | Etapa 5, passo a passo entregue | **Em revisão** | |
 | Etapa 6, o dev pediu alteração | **Fazendo** | |
-| Etapa 7, push feito | **Feito** | Só depois do push, nunca antes |
+| Etapa 7, PR aberto | continua **Em revisão** | |
+| Etapa 7, merge do PR (ou push, se o projeto sobe direto na principal) | **Feito** | Nunca antes |
 | Bloqueada (dependência, dúvida sem resposta) | **Travada** | Comentário na linha com o motivo |
 
 **Quem** = o usuário do GitHub do dev, lido com `gh api user --jq .login`. Sem o `gh` logado,
 perguntar ao dev. Nunca o nome do `git config`, que muda de máquina para máquina.
 
-## Status do módulo
+## Status do módulo (padrão)
 
 Opções: **A fazer**, **Fazendo**, **Concluído**.
 

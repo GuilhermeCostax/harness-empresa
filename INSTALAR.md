@@ -1,7 +1,8 @@
 # Instalar o harness num ambiente novo
 
 Passo a passo para um dev começar a usar o harness numa máquina nova, e para ligar o harness num
-projeto novo.
+projeto novo. Para configurar o harness para outra empresa, ver
+[PERSONALIZAR.md](PERSONALIZAR.md) primeiro.
 
 ## 1. O que precisa antes
 
@@ -55,10 +56,14 @@ Reiniciar o Claude Code depois.
 
 1. Copiar `modelos/CLAUDE-projeto.md` para a raiz do projeto como `CLAUDE.md` e preencher a
    seção **Dados do projeto (harness)**, a stack, a organização do código e as armadilhas.
-2. Criar `.claude/settings.json` no projeto:
+2. Criar `.claude/settings.json` no projeto. Ele liga o plugin e fixa o padrão de modelo (Opus 5.5)
+   e de esforço (médio) para todo mundo no projeto. Quem precisar de outro na própria máquina
+   muda no `.claude/settings.local.json` ou com `/model` e `/effort` na sessão.
 
    ```json
    {
+     "model": "claude-opus-5-5",
+     "effortLevel": "medium",
      "extraKnownMarketplaces": {
        "harness-empresa": {
          "source": { "source": "github", "repo": "GuilhermeCostax/harness-empresa" }
@@ -72,13 +77,9 @@ Reiniciar o Claude Code depois.
 
 3. Criar a pasta de documentação de funcionalidades com o modelo
    (`skills/documentar/modelo.md` vira `<pasta>/_modelo/README.md`).
-4. Gerar o `AGENTS.md`, para quem usa o Codex:
-
-   ```
-   /caminho/para/harness-empresa/scripts/gerar-agents.sh /caminho/do/projeto
-   ```
-
-5. Commitar `CLAUDE.md`, `AGENTS.md` e `.claude/settings.json` juntos.
+4. Pôr no `.gitignore` o arquivo de logins de teste e o arquivo de contexto que o `CLAUDE.md`
+   cita.
+5. Commitar `CLAUDE.md`, `.claude/settings.json` e o `.gitignore` juntos.
 
 ## 6. Testar uma mudança no plugin antes de subir
 

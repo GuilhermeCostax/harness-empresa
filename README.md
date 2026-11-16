@@ -1,40 +1,41 @@
 # harness-empresa
 
-Plugin do Claude Code com o processo de desenvolvimento da empresa. Cada projeto instala o
-plugin e escreve só o próprio `CLAUDE.md`, com a seção **Dados do projeto (harness)**.
+Base global do processo de desenvolvimento como **plugin do Claude Code**. Cada empresa copia esta
+base, ajusta o que for dela e instala nos seus projetos. Cada projeto escreve só o próprio
+`CLAUDE.md`, com a seção **Dados do projeto (harness)**.
+
+| Quero… | Ler |
+| --- | --- |
+| Configurar o harness para uma empresa | [PERSONALIZAR.md](PERSONALIZAR.md) |
+| Instalar numa máquina ou ligar num projeto | [INSTALAR.md](INSTALAR.md) |
 
 ## O que tem
 
 | Parte | Onde | O que faz |
 | --- | --- | --- |
 | Regras gerais | `regras/gerais.md` | Entram em toda sessão pelo hook `SessionStart` |
-| `/harness:tarefa <ID>` | `skills/tarefa/` | Conduz as 7 etapas de uma tarefa |
+| `/harness:tarefa <ID>` | `skills/tarefa/` | Conduz as 7 etapas de uma tarefa, com branch por tarefa |
 | `/harness:validar <ID>` | `skills/validar/` | Etapa 5: a IA valida o que é comando, o dev testa as telas |
-| `/harness:push <ID>` | `skills/push/` | Etapa 7: integra sem quebrar o trabalho dos outros e sobe |
-| `/harness:status <ID> <status>` | `skills/status/` | Status, Quem, módulo e gráfico no plano |
+| `/harness:push <ID>` | `skills/push/` | Etapa 7: integra sem quebrar o trabalho dos outros e abre o PR |
+| `/harness:status <ID> <status>` | `skills/status/` | Status no plano, no formato que o projeto define |
 | `/harness:documentar` | `skills/documentar/` | Documento da funcionalidade, pelo modelo |
-| Modelo de projeto | `modelos/CLAUDE-projeto.md` | Esqueleto do `CLAUDE.md` de um projeto novo |
-| Gerador do AGENTS.md | `scripts/gerar-agents.sh` | Junta projeto + regras + skills para o Codex |
+| Modelo de projeto | `modelos/CLAUDE-projeto.md` | Esqueleto do `CLAUDE.md` de um sistema novo |
 
 O dev não precisa chamar as skills pelo nome: "faz a EMP-14" já aciona a `tarefa`.
 
-## Instalar (por enquanto, local)
+## Padrões que a base já traz
 
-```
-claude plugin marketplace add /caminho/para/harness-empresa
-claude plugin install harness@harness-empresa
-```
-
-Para testar só numa sessão, sem instalar: `claude --plugin-dir /caminho/para/harness-empresa`.
-
-Conferir o plugin depois de mudar: `claude plugin validate /caminho/para/harness-empresa`.
+- Uma branch por tarefa e PR para a branch principal. O projeto pode optar por subir direto.
+- Opus 5.5 com esforço médio, definido no `.claude/settings.json` de cada projeto (um plugin não
+  consegue fixar o modelo).
+- Ao fechar uma tarefa: salvar o que importa no arquivo de contexto e limpar a conversa com
+  `/clear`.
+- Só Claude Code. Não há versão para o Codex.
 
 ## Mudar uma regra
 
-1. Regra que vale para todo projeto: editar aqui, por PR revisado por outro dev.
-2. Regra de um projeto só: editar o `CLAUDE.md` daquele projeto.
-3. Depois de qualquer um dos dois, gerar de novo o `AGENTS.md` do projeto:
-
-```
-scripts/gerar-agents.sh /caminho/do/projeto
-```
+| A regra vale para… | Onde mudar |
+| --- | --- |
+| Todas as empresas | Aqui, por PR revisado por outro dev |
+| Uma empresa | Na cópia daquela empresa |
+| Um sistema | No `CLAUDE.md` daquele sistema |
