@@ -30,6 +30,11 @@ Sem ID na chamada, ou ID que não está no plano: perguntar ao dev qual é o ID 
    pendência do documento) ou, se não der, avisar o dev.
 7. Dúvida de regra de negócio: seguir a ordem das regras gerais (doc de regras, reuniões, dev).
    Não adivinhar.
+8. **Separar o escopo explícito do que só aparece em volta.** Cruzar a linha da tarefa com o
+   protótipo e as reuniões. O que o protótipo mostra mas a linha do plano não diz (um botão de
+   exportar, uma aba a mais) **não entra sozinho**: antes de implementar, avisar o dev — o que é,
+   onde aparece e se outra tarefa do plano cobre algo parecido (buscar no plano por palavra) — e
+   perguntar se entra nesta tarefa ou vira tarefa separada.
 
 ## Etapa 2 — Referência visual
 
@@ -59,6 +64,11 @@ corrigir e chamar o testador de novo.
 
 Seguir a skill **validar**: a IA valida tudo o que é comando e entrega ao dev o passo a passo das
 telas. A tarefa vai para **Em revisão**.
+
+Tarefa longa, ou outra tarefa subiu na principal enquanto esta andava: antes de marcar
+**Em revisão**, chamar o sub-agente **integrador** e trazer a principal para o trabalho (rebase da
+branch da tarefa; no fluxo direto na principal, só depois de commitar). Pendência da tarefa vizinha
+que depende desta entra no escopo, sem esperar o dev pedir; o que foi encontrado vai no relatório.
 
 ## Etapa 6 — Retorno do dev
 

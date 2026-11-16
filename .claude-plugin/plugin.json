@@ -1,6 +1,6 @@
 {
   "name": "harness",
   "description": "Processo de desenvolvimento da empresa: regras gerais, as 7 etapas de uma tarefa, validação, push, status no plano e documentação de funcionalidades.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": { "name": "Equipe de desenvolvimento" }
 }

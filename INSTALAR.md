@@ -9,8 +9,7 @@ projeto novo. Para configurar o harness para outra empresa, ver
 | O quê | Como conferir |
 | --- | --- |
 | Claude Code instalado e logado na conta do dev | `claude --version` e `/login` dentro do Claude Code |
-| Acesso ao repositório `GuilhermeCostax/harness-empresa` (privado) | Pedir ao dono para adicionar o usuário do GitHub como colaborador |
-| Git com acesso ao GitHub | `gh auth status` mostra a conta logada, ou `git ls-remote https://github.com/GuilhermeCostax/harness-empresa` funciona |
+| Git com acesso ao GitHub (o repositório do plugin é público) | `git ls-remote https://github.com/GuilhermeCostax/harness-empresa` funciona |
 | GitHub CLI logado (o harness usa para preencher o *Quem* do plano) | `gh api user --jq .login` mostra o usuário |
 | Conector Claude Docs ligado (planos e docs de regras ficam lá) | No Claude Code, o plano do projeto abre pelas ferramentas de Docs |
 | Python 3.9 ou mais novo (os hooks de proteção rodam em Python) | `python3 --version`. Sem ele, os hooks não rodam e nada é bloqueado |
@@ -45,7 +44,12 @@ pela etapa 1, lendo a linha da tarefa no plano.
 
 ## 4. Atualizar o plugin
 
-Quando alguém mudar o harness:
+O `.claude/settings.json` do projeto liga a atualização automática (`"autoUpdate": true` no
+marketplace): o Claude Code busca a versão nova ao iniciar. Marketplace do GitHub vem com isso
+desligado por padrão, então confira uma vez: `/plugin` → aba **Marketplaces** → `harness-empresa`
+→ **Enable auto-update** (se já estiver ligado, não aparece).
+
+Para atualizar na hora, sem esperar:
 
 ```
 claude plugin marketplace update harness-empresa
@@ -70,7 +74,8 @@ Reiniciar o Claude Code depois.
      "attribution": { "commit": "", "pr": "" },
      "extraKnownMarketplaces": {
        "harness-empresa": {
-         "source": { "source": "github", "repo": "GuilhermeCostax/harness-empresa" }
+         "source": { "source": "github", "repo": "GuilhermeCostax/harness-empresa" },
+         "autoUpdate": true
        }
      },
      "enabledPlugins": {
@@ -99,6 +104,7 @@ forçado e de `git reset --hard` vale sempre, mesmo sem o arquivo.
 | `testes` | Duas execuções de testes ao mesmo tempo no mesmo banco | `comandos` de teste; `processoEmExecucao`, o padrão de processo (do `pgrep -f`) que indica teste rodando |
 | `documentacao` | Commit que mexe no código sem tocar no documento (só avisa) | `pasta` da documentação; `codigo`, as pastas que contam como código de funcionalidade |
 | `commit` | Título fora do padrão e assinatura do Claude | `tipos` aceitos; `idObrigatorioEm`, os tipos que exigem ID; `padraoId`, a forma do ID |
+| `comandosProibidos` | Comandos que a IA nunca roda no projeto (ex.: apagar ou derrubar o banco) | Lista de `padrao` (expressão regular, sem diferenciar maiúsculas; vale também dentro de aspas, como em `mysql -e "..."`) e `motivo` |
 
 O hook nunca mostra nem guarda valores do `.env`: só confere se o host do banco é local.
 
@@ -112,6 +118,7 @@ O hook nunca mostra nem guarda valores do `.env`: só confere se o host do banco
 | Antes de um comando | `git reset --hard` | Bloqueia |
 | Antes de um comando | Comando de `producao.comandos` com produção no `.env` | Bloqueia |
 | Antes de um comando | Teste com outra execução de teste rodando | Bloqueia |
+| Antes de um comando | Comando de `comandosProibidos` | Bloqueia, com o motivo |
 | Depois de um commit | Título fora do padrão, ID faltando, assinatura do Claude | Devolve ao Claude para corrigir com `--amend` |
 | Depois de um commit | Código mudou e documentação não | Avisa, sem exigir nada |
 

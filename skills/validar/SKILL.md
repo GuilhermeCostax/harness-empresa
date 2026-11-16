@@ -56,6 +56,10 @@ Só o que se testa usando o sistema:
 Tarefa só de backend: o passo a passo cobre o que aparece em alguma tela (ex.: a permissão nova
 na tela de cargos), e o resto fica no relatório da parte 1.
 
+No fim do relatório, uma seção à parte **"Fora do plano"**: tudo o que foi feito e não estava
+escrito na linha da tarefa (mesmo que o dev tenha aprovado no caminho), para ele conferir de uma
+vez. Sem nada assim, dizer "nada fora do plano".
+
 ## 3. Status
 
 Entregue o passo a passo, a tarefa vai para **Em revisão** (skill **status**). O commit só

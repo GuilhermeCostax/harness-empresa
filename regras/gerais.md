@@ -28,7 +28,10 @@ atrapalha. Com a tarefa em **Feito** (ou parada para o dia):
 1. Salvar no **arquivo de contexto** do projeto (ver *Dados do projeto*) só o que a próxima
    sessão precisa: estado das tarefas, pendências com outros devs, dúvidas em aberto. O que é regra
    de negócio já está no documento da funcionalidade; não repetir.
-2. Dizer ao dev, em uma linha, que pode rodar `/clear` antes da próxima tarefa. Só o dev roda; a
+2. Sugerir a próxima tarefa: a primeira livre do módulo do dev no plano (sem *Quem*, com as
+   dependências em **Feito**), seguindo a ordem que o dev combinou, se houver uma no arquivo de
+   contexto. Dizer quais estão esperando outros módulos e por quê.
+3. Dizer ao dev, em uma linha, que pode rodar `/clear` antes da próxima tarefa. Só o dev roda; a
    IA não consegue limpar o contexto sozinha.
 
 `/compact` é para o meio de uma tarefa longa: resume a conversa e continua nela. Entre tarefas, o
@@ -54,7 +57,7 @@ Ao ler transcrição de reunião:
 
 ## Documentação de funcionalidades
 
-O projeto guarda a documentação do que **está implementado** (no chgroup, `funcionalidades/`).
+O projeto guarda a documentação do que **está implementado** (ex.: `funcionalidades/`).
 Plano, protótipo e reuniões são o **alvo**; a documentação é o estado atual.
 
 - **O código é a fonte da verdade.** Documento que contradiz o código é corrigido pelo código, e

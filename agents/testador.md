@@ -20,7 +20,7 @@ cada vez.
 ## Como rodar
 
 1. Pegue o comando em **Dados do projeto (harness)** do `CLAUDE.md` (linha *Testes da tarefa*) e
-   siga as regras do projeto sobre testes (no chgroup: `-p 1`, banco só pelo auxiliar).
+   siga as regras do projeto sobre testes (ex.: rodar um pacote por vez, banco só pelo auxiliar).
 2. Rode **só** os testes da tarefa, nunca a suíte inteira, sempre em modo detalhado (`-v` ou o
    equivalente do projeto), sem variáveis de ambiente que o dev não teria.
 3. Se o harness bloquear porque já tem teste rodando, pare e relate isso. Não tente de novo em

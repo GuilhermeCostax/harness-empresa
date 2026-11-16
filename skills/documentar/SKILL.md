@@ -1,6 +1,6 @@
 ---
 name: documentar
-description: Cria ou atualiza o documento de uma funcionalidade na pasta de documentação do projeto (no chgroup, funcionalidades/), seguindo o modelo da empresa. Use em toda tarefa que muda comportamento, antes de editar qualquer arquivo dessa pasta, ou quando o dev pedir para documentar uma funcionalidade.
+description: Cria ou atualiza o documento de uma funcionalidade na pasta de documentação do projeto (ex.: funcionalidades/), seguindo o modelo da empresa. Use em toda tarefa que muda comportamento, antes de editar qualquer arquivo dessa pasta, ou quando o dev pedir para documentar uma funcionalidade.
 argument-hint: <módulo/funcionalidade> [ID da tarefa]
 ---
 
@@ -23,7 +23,7 @@ linha de tabela.
 
 ## Criar
 
-1. Usar o modelo do projeto (no chgroup, `funcionalidades/_modelo/README.md`). Se o projeto não
+1. Usar o modelo do projeto (ex.: `funcionalidades/_modelo/README.md`). Se o projeto não
    tiver um, usar o [modelo do plugin](modelo.md).
 2. Pasta `<módulo>/<funcionalidade>/`, nome em minúsculas com hífen, pelo nome que o time usa.
 3. Ler o código da funcionalidade inteira, **tela e backend**, não só o que a tarefa tocou.

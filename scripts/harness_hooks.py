@@ -52,9 +52,10 @@ def branch_principal(raiz, config):
     return ref.split("/", 1)[1] if "/" in ref else "main"
 
 
-def limpar_comando(comando):
+def limpar_comando(comando, aspas=True):
     """Tira corpo de heredoc e texto entre aspas, para uma mensagem de commit que *fala* de
-    `git reset --hard` não ser confundida com o comando."""
+    `git reset --hard` não ser confundida com o comando. aspas=False mantém o texto entre aspas
+    (o SQL de um `mysql -e "DROP DATABASE x"` fica entre aspas e precisa ser visto)."""
     linhas, saida, fim = comando.split("\n"), [], None
     for linha in linhas:
         if fim is not None:
@@ -66,6 +67,8 @@ def limpar_comando(comando):
             fim = m.group(1)
         saida.append(linha)
     texto = "\n".join(saida)
+    if not aspas:
+        return texto
     texto = re.sub(r'"(?:\\.|[^"\\])*"', '""', texto)
     texto = re.sub(r"'[^']*'", "''", texto)
     return texto
@@ -183,6 +186,18 @@ def checar_testes_simultaneos(parte, config):
         )
 
 
+def checar_proibidos(parte, config):
+    """Comandos que o projeto proíbe para a IA (ex.: derrubar ou apagar o banco). Cada item do
+    harness.json tem `padrao` (expressão regular, sem diferenciar maiúsculas) e `motivo`."""
+    for item in config.get("comandosProibidos", []):
+        try:
+            if re.search(item.get("padrao", r"(?!)"), parte, re.IGNORECASE):
+                bloquear(f"{item.get('motivo', 'comando proibido neste projeto')}. Se for mesmo "
+                         "necessário, o dev roda no terminal dele.")
+        except re.error:
+            continue
+
+
 def pre_bash(entrada):
     comando = (entrada.get("tool_input") or {}).get("command", "")
     if not comando:
@@ -193,6 +208,9 @@ def pre_bash(entrada):
         checar_git(parte, raiz, config)
         checar_producao(parte, raiz, config)
         checar_testes_simultaneos(parte, config)
+    # Sem tirar as aspas: o comando proibido pode estar dentro de um `-e "..."`.
+    for parte in partes(limpar_comando(comando, aspas=False)):
+        checar_proibidos(parte, config)
 
 
 # ---------- post-bash ----------
