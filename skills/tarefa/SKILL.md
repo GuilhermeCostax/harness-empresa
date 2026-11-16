@@ -48,9 +48,12 @@ Tarefa sem tela: pular para a etapa 3 e dizer isso ao dev.
 
 ## Etapa 4 — Testar
 
-Escrever o teste da funcionalidade e rodar **só os testes da tarefa**, em modo detalhado,
-conferindo que nenhum foi pulado. Correção de defeito: provar antes que o teste falha sem a
+Escrever o teste da funcionalidade. Correção de defeito: provar antes que o teste falha sem a
 correção.
+
+Rodar pelo sub-agente **testador** do harness (`harness:testador`), passando o ID e os testes da
+tarefa. Ele roda só esses testes, em modo detalhado, e conta pulado como problema. Falha ou pulo:
+corrigir e chamar o testador de novo.
 
 ## Etapa 5 — Validar
 

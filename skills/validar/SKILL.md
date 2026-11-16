@@ -24,11 +24,18 @@ Fazer e relatar o resultado de cada item:
   própria API;
 - itens extras de *Pronto* que o projeto lista em *Dados do projeto*.
 
-Antes de entregar ao dev, conferir o *Pronto* geral:
+## 1b. Revisão por quem não escreveu o código
 
-- documento da funcionalidade criado ou atualizado;
-- `grep -rn "<ID>"` na documentação rodado de novo: nenhuma pendência que cita a tarefa ficou sem
-  resolver ou sem aviso, e toda pendência nova que espera outra tarefa cita o ID dela.
+Antes de entregar ao dev, chamar **ao mesmo tempo** dois sub-agentes do harness, passando o ID
+da tarefa e os arquivos mudados:
+
+- **verificador** (`harness:verificador`): confere o *Pronto* geral e os itens extras do
+  projeto, com a prova de cada um. Passar para ele o resultado do testador da etapa 4;
+- **documentador** (`harness:documentador`): compara o documento da funcionalidade com o código.
+
+Corrigir o que eles apontarem e chamar de novo até não sobrar nada, ou até sobrar só o que
+depende de decisão do dev. O que sobrar vai no relatório da parte 1, com todas as letras.
+Divergência entre documento e código nunca se resolve mudando o código sem o dev decidir.
 
 A IA não abre navegador, não tira print e não pede para conferir pixel, a menos que o projeto
 diga o contrário.

@@ -19,6 +19,10 @@ base, ajusta o que for dela e instala nos seus projetos. Cada projeto escreve s�
 | `/harness:push <ID>` | `skills/push/` | Etapa 7: integra sem quebrar o trabalho dos outros e abre o PR |
 | `/harness:status <ID> <status>` | `skills/status/` | Status no plano, no formato que o projeto define |
 | `/harness:documentar` | `skills/documentar/` | Documento da funcionalidade, pelo modelo |
+| Sub-agente `verificador` | `agents/verificador.md` | Confere o *Pronto* com a prova de cada item (etapa 5) |
+| Sub-agente `documentador` | `agents/documentador.md` | Aponta onde o documento da funcionalidade diverge do código (etapa 5) |
+| Sub-agente `testador` | `agents/testador.md` | Roda só os testes da tarefa; pulado conta como problema (etapas 4 e 5) |
+| Sub-agente `integrador` | `agents/integrador.md` | Antes do push, simula a integração e aponta conflitos e riscos |
 | Hooks de proteção | `hooks/hooks.json` + `scripts/harness_hooks.py` | Bloqueiam push forçado, `reset --hard`, produção e testes simultâneos; conferem cada commit |
 | Modelo de projeto | `modelos/CLAUDE-projeto.md` | Esqueleto do `CLAUDE.md` de um sistema novo |
 | Configuração dos hooks | `modelos/harness.json` | Vai para `.claude/harness.json` de cada projeto |
@@ -29,7 +33,10 @@ O dev não precisa chamar as skills pelo nome: "faz a EMP-14" já aciona a `tare
 
 - Uma branch por tarefa e PR para a branch principal. O projeto pode optar por subir direto.
 - Opus 5.5 com esforço médio, definido no `.claude/settings.json` de cada projeto (um plugin não
-  consegue fixar o modelo).
+  consegue fixar o modelo da sessão).
+- Sub-agentes revisores só leem e usam modelos mais baratos: Sonnet para quem precisa de
+  julgamento (verificador, documentador, integrador) e Haiku para o testador. Para usar o mesmo
+  modelo da sessão, troque `model:` por `inherit` no arquivo do agente.
 - Ao fechar uma tarefa: salvar o que importa no arquivo de contexto e limpar a conversa com
   `/clear`.
 - Nada sai assinado pelo Claude: commits e PRs em nome do dev (`attribution` vazio no

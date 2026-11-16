@@ -31,7 +31,8 @@ claude plugin list
 ```
 
 A lista mostra `harness@harness-empresa`. Dentro do Claude Code, digitar `/harness:` mostra as
-skills `tarefa`, `validar`, `push`, `status` e `documentar`.
+skills `tarefa`, `validar`, `push`, `status` e `documentar`, e o comando `/agents` lista os
+sub-agentes `verificador`, `documentador`, `testador` e `integrador`.
 
 ## 3. Abrir um projeto que já usa o harness
 

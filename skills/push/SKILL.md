@@ -21,13 +21,9 @@ Antes de puxar, commitar a tarefa com a documentação junto, na mensagem das re
 
 ## 2. Ler o que chegou
 
-```
-git fetch origin
-git log --oneline HEAD..origin/<principal>
-git diff HEAD...origin/<principal> --stat
-```
-
-Ler os commits que tocam os mesmos arquivos ou a mesma funcionalidade, e o documento dela.
+Chamar o sub-agente **integrador** do harness (`harness:integrador`). Ele busca o que os outros
+devs subiram, simula a integração sem mexer no working tree e devolve os conflitos previstos, os
+riscos sem conflito e como manter as duas alterações funcionando. Usar esse relatório no passo 3.
 
 ## 3. Integrar
 
