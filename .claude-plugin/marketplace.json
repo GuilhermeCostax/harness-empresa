@@ -1,0 +1,16 @@
+{
+  "name": "harness-empresa",
+  "owner": {
+    "name": "Equipe de desenvolvimento"
+  },
+  "metadata": {
+    "description": "Plugins internos da empresa para o Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "harness",
+      "source": "./",
+      "description": "Processo de desenvolvimento da empresa para o Claude Code."
+    }
+  ]
+}
