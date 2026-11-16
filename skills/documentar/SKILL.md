@@ -1,6 +1,6 @@
 ---
 name: documentar
-description: Cria ou atualiza o documento de uma funcionalidade na pasta de documentação do projeto (ex.: funcionalidades/), seguindo o modelo da empresa. Use em toda tarefa que muda comportamento, antes de editar qualquer arquivo dessa pasta, ou quando o dev pedir para documentar uma funcionalidade.
+description: Cria ou atualiza o documento de uma funcionalidade na pasta de documentação do projeto (por exemplo funcionalidades/), seguindo o modelo da empresa. Use em toda tarefa que muda comportamento, antes de editar qualquer arquivo dessa pasta, ou quando o dev pedir para documentar uma funcionalidade.
 argument-hint: <módulo/funcionalidade> [ID da tarefa]
 ---
 
